@@ -2,6 +2,7 @@ const path = require('path')
 const { merge } = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const base = require('./webpack.base.js')
 
 module.exports = merge(base, {
@@ -10,7 +11,6 @@ module.exports = merge(base, {
   // 生产环境下才会打包到 dist，生产环境下才需要设置 path 和 clean
   output: {
     path: path.resolve(__dirname, '../dist'), // 打包后的代码放在 dist 目录下
-    filename: '[name].[contenthash].js',
     clean: true, // 打包前清除 dist 目录
   },
   module: {
@@ -40,7 +40,9 @@ module.exports = merge(base, {
   optimization: {
     minimizer: [
       //js 压缩： 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`）
-      `...`,
+      new TerserPlugin({
+        extractComments: false, // 禁止生成 LICENSE文件
+      }),
       // css压缩
       new CssMinimizerPlugin({
         // 默认开启
@@ -48,9 +50,6 @@ module.exports = merge(base, {
       }),
       // 图片压缩
     ],
-    splitChunks: {
-      chunks: 'all',
-    },
   },
   plugins: [
     new MiniCssExtractPlugin({

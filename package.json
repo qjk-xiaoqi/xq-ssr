@@ -2,15 +2,16 @@
   "name": "xq-ssr",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack serve -c scripts/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack -c scripts/webpack.prod.js"
+    "build:serve": "cross-env NODE_ENV=production webpack  -c scripts/webpack.serve.js --watch",
+    "dev:client": "cross-env NODE_ENV=development webpack serve -c scripts/webpack.dev.js",
+    "build:client": "cross-env NODE_ENV=production webpack -c scripts/webpack.prod.js --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.19.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -44,6 +45,7 @@
     "webpack": "^5.76.1",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "webpack-node-externals": "^3.0.0"
   }
 }

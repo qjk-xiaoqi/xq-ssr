@@ -23,7 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
     "noEmit": true,
-    "skipLibCheck": true                        
+    "skipLibCheck": true,                 
   },
   "include": ["src"]
 }

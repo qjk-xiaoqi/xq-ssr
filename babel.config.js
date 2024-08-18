@@ -15,7 +15,7 @@ module.exports = {
       },
     ],
     ['@babel/preset-typescript'],
-    ['@babel/preset-react'],
+    ['@babel/preset-react', { runtime: 'automatic' }],
   ],
   plugins: [
     isDEV && require.resolve('react-refresh/babel'), // 如果是开发模式,就启动react热更新插件
