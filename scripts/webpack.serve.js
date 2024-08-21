@@ -8,7 +8,7 @@ module.exports = merge(base, {
   target: 'node',
   entry: path.resolve(__dirname, '../src/server/index.js'),
   output: {
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
     clean: true, // 打包前清除 dist 目录,
     path: path.resolve(__dirname, '../build'),
   },

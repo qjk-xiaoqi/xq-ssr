@@ -1,10 +1,9 @@
 import * as React from 'react'
-
 import Coffee from '@/assets/images/coffee.jpg'
 
 // import './index.less'
 
-const App: React.FC = () => {
+export const Home: React.FC = () => {
   const handleClick = () => {
     console.log('66666')
   }
@@ -16,5 +15,3 @@ const App: React.FC = () => {
     </div>
   )
 }
-
-export default App
