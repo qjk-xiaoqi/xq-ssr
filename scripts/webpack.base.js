@@ -1,10 +1,9 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, '../src/client/index.tsx'),
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].js',
   },
   resolve: {
     extensions: ['.mjs', '.js', '.json', '.jsx', '.ts', '.tsx'],

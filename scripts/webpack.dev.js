@@ -10,7 +10,9 @@ module.exports = merge(base, {
         test: /\.(css|less)$/,
         use: [
           'style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+          },
           {
             loader: 'postcss-loader',
             options: {

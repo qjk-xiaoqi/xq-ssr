@@ -1,17 +1,15 @@
 import * as React from 'react'
-import Coffee from '@/assets/images/coffee.jpg'
-
-// import './index.less'
+import useStyles from 'isomorphic-style-loader/useStyles'
+import styles from './index.less'
 
 export const Home: React.FC = () => {
+  useStyles(styles)
   const handleClick = () => {
-    console.log('66666')
+    console.log('hello 小柒')
   }
   return (
-    <div className="wrapper">
+    <div className={styles.wrapper} onClick={handleClick}>
       hello 小柒
-      <div onClick={handleClick}>66666</div>
-      <img src={Coffee} width={200} height={100} />
     </div>
   )
 }
