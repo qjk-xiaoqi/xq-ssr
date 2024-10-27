@@ -2,12 +2,14 @@ import express from 'express'
 import React from 'react'
 const fs = require('fs')
 const path = require('path')
+import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
 import StyleContext from 'isomorphic-style-loader/StyleContext'
 import { Home } from '../component/home'
 import { Detail } from '../component/detail'
 import { StaticRouter } from 'react-router-dom/server'
 import { Routes, Route, Link } from 'react-router-dom'
+import { getStore } from '../store'
 
 const app = express()
 
@@ -17,16 +19,18 @@ app.get('*', (req, res) => {
   const css = new Set() // CSS for all rendered React components
   const insertCss = (...styles) => styles.forEach((style) => css.add(style._getCss()))
   const content = renderToString(
-    <StyleContext.Provider value={{ insertCss }}>
-      <StaticRouter location={req.url}>
-        <Link to="/">首页</Link>
-        <Link to="/detail">detail</Link>
-        <Routes>
-          <Route path="/" Component={Home} />
-          <Route path="/detail" Component={Detail} />
-        </Routes>
-      </StaticRouter>
-    </StyleContext.Provider>
+    <Provider store={getStore()}>
+      <StyleContext.Provider value={{ insertCss }}>
+        <StaticRouter location={req.url}>
+          <Link to="/">首页</Link>
+          <Link to="/detail">detail</Link>
+          <Routes>
+            <Route path="/" Component={Home} />
+            <Route path="/detail" Component={Detail} />
+          </Routes>
+        </StaticRouter>
+      </StyleContext.Provider>
+    </Provider>
   )
 
   const jsFiles = fs.readdirSync(path.join(__dirname, '../dist')).filter((file) => file.endsWith('.js'))

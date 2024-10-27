@@ -3,6 +3,8 @@ import StyleContext from 'isomorphic-style-loader/StyleContext'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { Home } from '../component/home'
 import { Detail } from '../component/detail'
+import { Provider } from 'react-redux'
+import { getStore } from '../store'
 
 const App: React.FC = () => {
   const insertCss = (...styles: any[]) => {
@@ -10,16 +12,18 @@ const App: React.FC = () => {
     return () => removeCss.forEach((dispose) => dispose())
   }
   return (
-    <StyleContext.Provider value={{ insertCss }}>
-      <BrowserRouter>
-        <Link to="/">首页</Link>
-        <Link to="/detail">detail</Link>
-        <Routes>
-          <Route path="/" Component={Home} />
-          <Route path="/detail" Component={Detail} />
-        </Routes>
-      </BrowserRouter>
-    </StyleContext.Provider>
+    <Provider store={getStore()}>
+      <StyleContext.Provider value={{ insertCss }}>
+        <BrowserRouter>
+          <Link to="/">首页</Link>
+          <Link to="/detail">detail</Link>
+          <Routes>
+            <Route path="/" Component={Home} />
+            <Route path="/detail" Component={Detail} />
+          </Routes>
+        </BrowserRouter>
+      </StyleContext.Provider>
+    </Provider>
   )
 }
 
