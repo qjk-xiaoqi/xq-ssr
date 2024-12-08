@@ -1,10 +1,9 @@
 import * as React from 'react'
 import StyleContext from 'isomorphic-style-loader/StyleContext'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { Home } from '../component/home'
-import { Detail } from '../component/detail'
 import { Provider } from 'react-redux'
 import { getStore } from '../store'
+import routes from '@/routes'
 
 const App: React.FC = () => {
   const insertCss = (...styles: any[]) => {
@@ -18,8 +17,9 @@ const App: React.FC = () => {
           <Link to="/">首页</Link>
           <Link to="/detail">detail</Link>
           <Routes>
-            <Route path="/" Component={Home} />
-            <Route path="/detail" Component={Detail} />
+            {routes.map((route) => (
+              <Route key={route.path} path={route.path} Component={route.component} />
+            ))}
           </Routes>
         </BrowserRouter>
       </StyleContext.Provider>

@@ -1,21 +1,23 @@
 import * as React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import useStyles from 'isomorphic-style-loader/useStyles'
 import { fetchUsers } from '../../store/user-slice'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 import styles from './index.less'
 
-export const Home: React.FC = () => {
+export const Home = () => {
   useStyles(styles)
-  const dispatch = useDispatch()
-  const userList = useSelector((state) => state.users?.list)
+  const dispatch = useAppDispatch()
+  const userList = useAppSelector((state) => state.users?.list)
+
   const handleClick = () => {
     console.log('hello 小柒')
   }
 
   React.useEffect(() => {
+    // console.log(userList, 'userList->>>>>>>>>>')
     dispatch(fetchUsers())
   }, [])
-  console.log(userList, 'userList->>>>>>>>>>')
+
   return (
     <div className={styles.wrapper} onClick={handleClick}>
       hello 小柒
@@ -24,4 +26,8 @@ export const Home: React.FC = () => {
       ))}
     </div>
   )
+}
+
+Home.loadData = (store: any) => {
+  return store.dispatch(fetchUsers())
 }
