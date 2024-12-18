@@ -1,7 +1,8 @@
 import * as React from 'react'
 import useStyles from 'isomorphic-style-loader/useStyles'
-import { fetchUsers } from '../../store/user-slice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
+import { fetchUsers } from '../../store/user-slice'
+
 import styles from './index.less'
 
 export const Home = () => {
@@ -14,9 +15,11 @@ export const Home = () => {
   }
 
   React.useEffect(() => {
-    // console.log(userList, 'userList->>>>>>>>>>')
+    if (userList?.length > 0) {
+      return
+    }
     dispatch(fetchUsers())
-  }, [])
+  }, [userList])
 
   return (
     <div className={styles.wrapper} onClick={handleClick}>
@@ -27,7 +30,6 @@ export const Home = () => {
     </div>
   )
 }
-
 Home.loadData = (store: any) => {
   return store.dispatch(fetchUsers())
 }

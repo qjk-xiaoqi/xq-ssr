@@ -30,17 +30,13 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.pending, (state) => {
-        console.log('loading->>>>>')
         state.status = 'loading'
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        console.log('succeeded->>>>>')
-
         state.status = 'succeeded'
         state.list = action.payload
       })
       .addCase(fetchUsers.rejected, (state, action) => {
-        console.log('failed->>>>>')
         state.status = 'failed'
       })
   },
