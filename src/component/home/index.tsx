@@ -5,6 +5,14 @@ import { fetchUsers } from '../../store/user-slice'
 
 import styles from './index.less'
 
+// const Detail = React.lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(import('../detail'))
+//     }, 5000)
+//   })
+// })
+
 export const Home = () => {
   useStyles(styles)
   const dispatch = useAppDispatch()
@@ -27,6 +35,9 @@ export const Home = () => {
       {userList?.map((user) => (
         <div key={user.id}>{user.first_name + user.last_name}</div>
       ))}
+      {/* <React.Suspense fallback={<div>loading</div>}>
+        <Detail />
+      </React.Suspense> */}
     </div>
   )
 }
