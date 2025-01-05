@@ -5,13 +5,13 @@ import { fetchUsers } from '../../store/user-slice'
 
 import styles from './index.less'
 
-// const Detail = React.lazy(() => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(import('../detail'))
-//     }, 5000)
-//   })
-// })
+const Comment = React.lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(import('../Comment'))
+    }, 3000)
+  })
+})
 
 export const Home = () => {
   useStyles(styles)
@@ -35,9 +35,11 @@ export const Home = () => {
       {userList?.map((user) => (
         <div key={user.id}>{user.first_name + user.last_name}</div>
       ))}
-      {/* <React.Suspense fallback={<div>loading</div>}>
-        <Detail />
-      </React.Suspense> */}
+      <div className={styles.comment}>
+        <React.Suspense fallback={<div>loading...</div>}>
+          <Comment />
+        </React.Suspense>
+      </div>
     </div>
   )
 }
